@@ -7,12 +7,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define TRUE 1
+
 // Descrição de algumas funções utilizadas no código:	
-//  pathname must be either a binary executable, or a script starting with a line of the form:
-// #!interpreter[optional - arg]
 
 //  int execve(const char *pathname, char *const argv[], char *const envp[]);
+//  pathname must be either a binary executable, or a script starting with a line of the form:
+// #!interpreter[optional - arg]
 
 //  argv  is  an  array  of argument strings passed to the new program.  By convention, the first of these strings (i.e., argv[0]) should contain the filename associated with the file being executed.
 
@@ -24,8 +24,12 @@
 // Guilherme Leite Félix
 // Diego Sindeaux Soares de Holanda
 
-char command[100];
-char *parameters[20];
+#define TRUE 1
+#define COMMAND_SIZE 100
+#define PARAMETER_SIZE 20
+
+char command[COMMAND_SIZE];
+char *parameters[PARAMETER_SIZE];
 int status;
 
 void type_prompt() {
@@ -35,7 +39,7 @@ void type_prompt() {
 void read_command() {
     char *token;
     int i = 0;
-    fgets(command, 100, stdin);
+    fgets(command, COMMAND_SIZE, stdin);
     token = strtok(command, " \n");
     while (token != NULL) {
         parameters[i] = token;
